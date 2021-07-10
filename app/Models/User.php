@@ -40,4 +40,43 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function tasks()
+    {
+        return $this->hasMany(Task::class);
+    }
+    public function statuses()
+    {
+        return $this->hasMany(Status::class)->orderBy('order');
+    }
+
+
+    public function booted()
+    {
+        static::created(function ($user){
+            // Create Default statuses for any User Created
+            $user->statuses()->createMany([
+                [
+                    'title' => 'Backlog',
+                    'slug' => 'backlog',
+                    'order' => 1
+                ],
+                [
+                    'title' => 'Up Next',
+                    'slug' => 'up-next',
+                    'order' => 2
+                ],
+                [
+                    'title' => 'In Progress',
+                    'slug' => 'in-progress',
+                    'order' => 3
+                ],
+                [
+                    'title' => 'Done',
+                    'slug' => 'done',
+                    'order' => 4
+                ]
+            ]);
+        });
+    }
 }
