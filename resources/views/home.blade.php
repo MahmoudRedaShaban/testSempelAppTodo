@@ -20,6 +20,16 @@
                 <p class="text-gray-700">
                     You are logged in!
                 </p>
+
+
+                <div class="w-full p-6" >
+                    <a href="/tasks" class="mt-4 sm:mt-0 sm:ml-6 inline-block bg-teal-500 text-white text-sm font-semibold rounded-md px-4 py-4 hover:bg-teal-600">
+                        Tasks 
+                      </a>
+                      <a href="/statuses" class="mt-4 sm:mt-0 sm:ml-6 inline-block bg-green-500 text-white text-sm font-semibold rounded-md px-4 py-4 hover:bg-teal-600">
+                        Status 
+                      </a>
+                </div>
             </div>
         </section>
     </div>

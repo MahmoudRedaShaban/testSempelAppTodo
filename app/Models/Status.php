@@ -8,7 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Status extends Model
 {
     use HasFactory;
-    protected $greded = ['user_id'];
+    
+    protected $fillable = ['title', 'slug', 'order'];
 
     public $timestamps = false;
 

@@ -51,7 +51,7 @@ class User extends Authenticatable
     }
 
 
-    public function booted()
+    public static  function booted()
     {
         static::created(function ($user){
             // Create Default statuses for any User Created

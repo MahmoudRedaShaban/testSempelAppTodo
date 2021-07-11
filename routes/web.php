@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\StatusController;
 use App\Http\Controllers\TaskController;
 use Illuminate\Support\Facades\Route;
 
@@ -28,10 +29,13 @@ Route::group(['middleware' => 'auth'], function(){
     Route::post('tasks', [TaskController::class, 'store'])->name('tasks.store');
     Route::put('tasks/sync', [TaskController::class, 'sync'])->name('tasks.sync');
     Route::put('tasks/{task}', [TaskController::class, 'update'])->name('tasks.update');
+    Route::delete('/tasks/{task}',[TaskController::class, 'distroy'])->name('tasks.delete');
 });
 
 
 Route::group(['middleware' => 'auth'], function(){
+    Route::get('statuses', [StatusController::class, 'index'])->name('statuses.store');
     Route::post('statuses', [StatusController::class, 'store'])->name('statuses.store');
-    Route::put('statuses', [StatusController::class, 'update'])->name('statuses.update');
+    Route::put('statuses/{id}', [StatusController::class, 'update'])->name('statuses.update');
+    Route::delete('statuses/{id}', [StatusController::class, 'distroy'])->name('statuses.delete');
 });
