@@ -36,6 +36,7 @@ Route::group(['middleware' => 'auth'], function(){
 Route::group(['middleware' => 'auth'], function(){
     Route::get('statuses', [StatusController::class, 'index'])->name('statuses.store');
     Route::post('statuses', [StatusController::class, 'store'])->name('statuses.store');
+    Route::post('statuses/task', [StatusController::class, 'store_task'])->name('statuses.storeTask');
     Route::put('statuses/{id}', [StatusController::class, 'update'])->name('statuses.update');
     Route::delete('statuses/{id}', [StatusController::class, 'distroy'])->name('statuses.delete');
 });

@@ -81,6 +81,13 @@ export default {
         })
         .catch(err => {
           // Handle the error returned from our request
+           this.$swal.fire({
+                    position: 'bottom-end',
+                    icon: 'warning',
+                    title: 'Your task has been  Not Updated.',
+                    showConfirmButton: false,
+                    timer: 1000
+                    });
           this.handleErrors(err);
         });
     },

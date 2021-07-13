@@ -26,6 +26,21 @@ class StatusController extends Controller
             'order' => (integer) $request->get('order'),
         ]);
     }
+    public function store_task(Request $request)
+    {
+        $this->validate($request, [
+            'title' => 'required|string|max:56'
+        ]);
+
+        $slug = strtolower(preg_replace('/[^a-zA-Z0-9\-]/', '',preg_replace('/\s+/', '-', $request->get('title')) ));
+        $createsta =  auth()->user()->statuses()->create([
+            'title' => $request->get('title'),
+            'slug' => $slug,
+            'order' => (integer) $request->get('order'),
+        ]);
+
+        return auth()->user()->statuses()->with('tasks')->get();
+    }
 
     public function show($id)
     {

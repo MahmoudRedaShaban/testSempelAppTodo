@@ -1,6 +1,15 @@
 <template>
   <form
-    class="relative mb-3 flex flex-col justify-between bg-white rounded-md shadow overflow-hidden"
+    class="
+      relative
+      mb-3
+      flex flex-col
+      justify-between
+      bg-white
+      rounded-md
+      shadow
+      overflow-hidden
+    "
     @submit.prevent="handleAddNewTask"
   >
     <div class="p-3 flex-1">
@@ -11,7 +20,7 @@
         v-model.trim="newTask.title"
       />
       <textarea
-        class="mt-3 p-2 block w-full p-1 border text-sm rounded"
+        class="mt-3 p-2 block w-full border text-sm rounded"
         rows="2"
         placeholder="Add a description (optional)"
         v-model.trim="newTask.description"
@@ -32,7 +41,15 @@
       </button>
       <button
         type="submit"
-        class="px-3 py-1 leading-5 text-white bg-orange-600 hover:bg-orange-500 rounded"
+        class="
+          px-3
+          py-1
+          leading-5
+          text-white
+          bg-orange-600
+          hover:bg-orange-500
+          rounded
+        "
       >
         Add
       </button>
@@ -43,16 +60,16 @@
 <script>
 export default {
   props: {
-    statusId: Number
+    statusId: Number,
   },
   data() {
     return {
       newTask: {
         title: "",
         description: "",
-        status_id: null
+        status_id: null,
       },
-      errorMessage: ""
+      errorMessage: "",
     };
   },
   mounted() {
@@ -69,12 +86,20 @@ export default {
       // Send new task to server
       axios
         .post("/tasks", this.newTask)
-        .then(res => {
+        .then((res) => {
           // Tell the parent component we've added a new task and include it
           this.$emit("task-added", res.data);
         })
-        .catch(err => {
+        .catch((err) => {
           // Handle the error returned from our request
+
+          this.$swal.fire({
+            position: "bottom-end",
+            icon: "warning",
+            title: "Your task has been  Not Added.",
+            showConfirmButton: false,
+            timer: 1000,
+          });
           this.handleErrors(err);
         });
     },
@@ -93,7 +118,7 @@ export default {
         // We have bigger problems
         console.log(err.response);
       }
-    }
-  }
+    },
+  },
 };
 </script>

@@ -60,3 +60,13 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 ## License
 
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+--complet add Status in board Task    and test for app is working 
+#Api Project -
+#auth 
+-- add jwt and seting  login and rigetser with jwt from api 
+
+--and create rouet APi for[ Tasks , Statue]and create conroler-Api 
+
+-- deploy app for server and select domain and upload code in githup
+
+
