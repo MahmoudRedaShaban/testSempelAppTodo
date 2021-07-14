@@ -290,11 +290,11 @@ export default {
       });
     },
 
-    hundelAddStatus() {
-      this.newtStatue = this.$swal.fire({
+     async hundelAddStatus()  {
+      this.newtStatue = await this.$swal.fire({
         title: "Multiple inputs",
         html:
-          '<span class="inline-block w-20 mr-6 text-right font-bold text-gray-600">Title:</span><input id="swal-input1" class="swal2-input">' +
+          '<span class="inline-block text-right font-bold text-gray-600">Title:</span><input id="swal-input1" class="swal2-input">' +
           '<span class="inline-block w-20 mr-6 text-right font-bold text-gray-600">Order:</span><input  type="number" require id="swal-input2" class="swal2-input">',
         focusConfirm: false,
         preConfirm: () => {
@@ -305,14 +305,23 @@ export default {
         },
       });
       // TODO
-      console.log(this.sta);
-      if (formValues) {
-        this.$swal.fire(JSON.stringify(formValues));
+      if (this.newtStatue.value ) {
+          if (isNaN(parseInt(this.newtStatue.value[1]))){
+            this.$swal.fire(
+            "Faild Added!",
+            "Please Enter the Order Number .",
+            "warning"
+          );
+          return;
+          }
+            this.addNwStatus({title: this.newtStatue.value[0], order:  parseInt(this.newtStatue.value[0]) });
+
+        // this.$swal.fire(JSON.stringify(JSON.parse(this.newtStatue.value)));
       }
     },
     addNwStatus(data) {
       // Basic validation so we don't send an empty Statu to the server
-      if (!this.statusnew.title) {
+      if (!data.title) {
         return;
       }
       // Send new task to server
@@ -329,7 +338,7 @@ export default {
             timer: 1000,
           });
           this.netStatue = { title: "", order: 0 };
-          this.statuses = JSON.parse(JSON.stringify(this.initialData));
+          this.statuses = JSON.parse(JSON.stringify(res.data));
         })
         .catch((err) => {
           // Handle the error returned from our request
